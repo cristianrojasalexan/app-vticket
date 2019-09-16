@@ -14,5 +14,8 @@ Rails.application.routes.draw do
   delete 'ticket/:id', to: 'tickets#destroy'
 
   get "tickets/mytickets", to: "tickets#mytickets"
+  get 'tickets/:id/myticketedit', to: 'tickets#myticketedit', as: 'edit_myticket'
+  patch '/myticketedit/:id', to: 'tickets#myticketupdate'
+  put '/myticketedit/:id', to: 'tickets#myticketupdate'
 
 end

@@ -29,14 +29,29 @@ class TicketsController < ApplicationController
         @user = get_username(current_user.id)
         @users = User.where(admin: false)
     end
+
+    def myticketedit
+        @ticket = Ticket.find(params[:id])
+        @user = get_username(current_user.id)
+        @users = User.where(admin: false)
+    end
     
+    def myticketupdate
+        @ticket = Ticket.find(params[:id])
+        if @ticket.update(ticket_params)
+            redirect_to tickets_mytickets_path
+        else
+            render :edit
+        end
+    end
+
     def update
         @ticket = Ticket.find(params[:id])
-          if @ticket.update(ticket_params)
+        if @ticket.update(ticket_params)
             redirect_to tickets_list_path
-          else
+        else
             render :edit
-          end
+        end
     end
 
     def list

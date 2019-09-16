@@ -9,15 +9,22 @@
                 <th>Titulo</th>
                 <th>Descripción</th>
                 <th>Prioridad</th>
+                <th>Estado</th>
+                <th></th>
                 </thead>
             </tr>
             <% @tickets.each do |ticket| %>
             <tr>
                 <td><%= ticket.title %></td>
                 <td><%= ticket.description %></td>
-                <td><%= ticket.priority %></td>
+                <%if ticket.priority == 1%>
+                    <td class="bg-gradient-danger text-white"><%= get_priority_text(ticket.priority) %></td>
+                <% else %>
+                    <td><%= get_priority_text(ticket.priority) %></td>
+                <% end %>
+                <td><%= get_status_text(ticket.status) %></td>
                 <td>
-                    
+                    <%= link_to "Cambiar Estado", edit_myticket_path(ticket), class: "btn btn-info" %>
                 </td>
             </tr>
             <% end %>
