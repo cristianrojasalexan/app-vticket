@@ -1,0 +1,29 @@
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h3 class="m-0 font-weight-bold text-gray-600">Listado de Tickets</h3> 
+    </div>
+    <div class="card-body">
+        <%= link_to "Crear Ticket", tickets_new_path, class: "btn btn-primary" %>
+        <table class="table table-hover">
+            <tr>
+                <thead>
+                <th>Titulo</th>
+                <th>Descripción</th>
+                <th>Prioridad</th>
+                </thead>
+            </tr>
+            <% @tickets.each do |ticket| %>
+            <tr>
+                <td><%= ticket.title %></td>
+                <td><%= ticket.description %></td>
+                <td><%= ticket.priority %></td>
+                <td>
+                    <%= link_to "Editar", edit_ticket_path(ticket), class: "btn btn-success" %>
+                    <%= link_to "Eliminar",  { action: :destroy, id: ticket.id }, method: :delete, data: 
+                    { confirm: "Deseas eliminar este ticket?"}, class: "btn btn-danger" %>
+                </td>
+            </tr>
+            <% end %>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,42 @@
+<div class="col-lg-6">             
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Nuevo Ticket</h6>
+        </div>
+        <div class="card-body">
+            <%= form_for @ticket do |f| %>
+                <div class="form-group">
+                <%= f.label :title, "Titulo" %>
+                <%= f.text_field :title, class: "form-control" %>
+                </div>
+                <div class="form-group">
+                <%= f.label :description, "Descripción" %>
+                <%= f.text_area :description, class: "form-control" %>
+                </div>
+                <div class="form-group">
+                <%= f.label :priority, "Prioridad" %>
+                <%= f.select :priority, [["Alta",1], ["Normal",2], ["Baja",3]], 
+                    { prompt: "Seleccione prioridad..." }, 
+                    { class: "form-control", required: true } %>
+                </div>
+                <div class="form-group">
+                <%= f.label :status, "Estado" %>
+                <%= f.select :status, [["Pendiente",1], ["En Desarrollo",2], ["Terminado",3], ["Cancelado",4]], 
+                    { prompt: "Seleccione Estado..." }, 
+                    { class: "form-control", required: true } %>
+                </div>
+                <div class="form-group">
+                    <%= f.label :user_id, "Asociar a Usuario" %>
+                    <select class="form-control" name="ticket[user_id]">
+                        <% @users.each do |user| %>
+                            <option value="<%= user.id %>"><%= user.first_name.titleize %> <%= user.last_name.titleize %></option>
+                        <% end %>                
+                    </select>
+                </div>
+                <div class="form-group">
+                <%= f.submit "Crear Ticket", class: "btn btn-block btn-primary" %>
+                </div>
+            <% end %>
+        </div>
+    </div>
+</div>

@@ -1,8 +1,9 @@
 class HomeController < ApplicationController
   before_action :require_login
+  include HomeHelper
   
   def index
-  
+    @user = get_username(current_user.id)
   end
 
   private
